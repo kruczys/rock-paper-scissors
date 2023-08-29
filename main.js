@@ -1,15 +1,15 @@
 const getComputerChoice = () => {
   const randomChoice = Math.floor(Math.random() * 3 + 1);
   return randomChoice === 1
-    ? "Rock"
+    ? "rock"
     : randomChoice === 2
-    ? "Paper"
-    : "Scissors";
+    ? "paper"
+    : "scissors";
 };
 
 const playRound = (playerSelection, computerSelection) => {
-  const playerSelectionLow = playerSelection.toLowerCase();
-  const computerSelectionLow = computerSelection.toLowerCase();
+  const playerSelectionLow = playerSelection;
+  const computerSelectionLow = computerSelection;
   let result = ["", 0, 0];
 
   switch (playerSelectionLow) {
@@ -61,24 +61,6 @@ const playRound = (playerSelection, computerSelection) => {
     : [`You loose! ${computerSelectionLow} beats ${playerSelectionLow}`, 0, 1];
 };
 
-const game = (rounds) => {
-  let playerScore = 0;
-  let computerScore = 0;
-
-  for (let i = 0; i <= rounds; i++) {
-    const computerPlay = getComputerChoice();
-    const playerPlay = window.prompt("What is your choice? ");
-    const roundResult = playRound(playerPlay, computerPlay);
-    playerScore += roundResult[1];
-    computerScore += roundResult[2];
-
-    console.log(
-      roundResult[0],
-      `Your score: ${playerScore}, SI score: ${computerScore}`
-    );
-  }
-};
-
 let playerScore = 0;
 let computerScore = 0;
 
@@ -89,6 +71,7 @@ const computerScoreText = document.querySelector("#right");
 
 choices.forEach((choice) => {
   choice.addEventListener("click", (e) => {
+    console.log(e.target.id);
     const gameResult = playRound(e.target.id, getComputerChoice());
     textResult.textContent = gameResult[0];
     playerScore += gameResult[1];
