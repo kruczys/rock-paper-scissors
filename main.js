@@ -79,9 +79,22 @@ const game = (rounds) => {
   }
 };
 
+let playerScore = 0;
+let computerScore = 0;
+
 const choices = document.querySelectorAll(".game-choice");
+const textResult = document.querySelector(".result-text");
+const playerScoreText = document.querySelector("#left");
+const computerScoreText = document.querySelector("#right");
+
 choices.forEach((choice) => {
   choice.addEventListener("click", (e) => {
-    e.target.style.background = "lightgray";
+    const gameResult = playRound(e.target.id, getComputerChoice());
+    textResult.textContent = gameResult[0];
+    playerScore += gameResult[1];
+    computerScore += gameResult[2];
+
+    playerScoreText.textContent = playerScore;
+    computerScoreText.textContent = computerScore;
   });
 });
