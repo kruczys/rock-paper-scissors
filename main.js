@@ -61,6 +61,27 @@ const playRound = (playerSelection, computerSelection) => {
     : [`You loose! ${computerSelectionLow} beats ${playerSelectionLow}`, 0, 1];
 };
 
+const resetGame = () => {
+  playerScore = 0;
+  computerScore = 0;
+
+  textResult.textContent = "Make a choice!";
+  playerScoreText.textContent = playerScore;
+  computerScoreText.textContent = computerScore;
+  playerScoreBoard.textContent = "YOU:";
+  computerScoreBoard.textContent = ":SI";
+};
+
+const clearScoreBoard = () => {
+  playerScore = 0;
+  computerScore = 0;
+
+  playerScoreText.textContent = "";
+  computerScoreText.textContent = "";
+  playerScoreBoard.textContent = "";
+  computerScoreBoard.textContent = "";
+};
+
 let playerScore = 0;
 let computerScore = 0;
 
@@ -68,16 +89,31 @@ const choices = document.querySelectorAll(".game-choice");
 const textResult = document.querySelector(".result-text");
 const playerScoreText = document.querySelector("#left");
 const computerScoreText = document.querySelector("#right");
+const resetButton = document.querySelector("#reset-button");
+const playerScoreBoard = document.querySelector("#you");
+const computerScoreBoard = document.querySelector("#si");
 
 choices.forEach((choice) => {
   choice.addEventListener("click", (e) => {
-    console.log(e.target.id);
     const gameResult = playRound(e.target.id, getComputerChoice());
     textResult.textContent = gameResult[0];
+
     playerScore += gameResult[1];
     computerScore += gameResult[2];
 
     playerScoreText.textContent = playerScore;
     computerScoreText.textContent = computerScore;
+    playerScoreBoard.textContent = "YOU:";
+    computerScoreBoard.textContent = ":SI";
+
+    if (playerScore >= 5) {
+      textResult.textContent = "YOU WON!!!";
+      clearScoreBoard();
+    } else if (computerScore >= 5) {
+      textResult.textContent = "YOU LOST!!!";
+      clearScoreBoard();
+    }
   });
 });
+
+resetButton.addEventListener("click", resetGame);

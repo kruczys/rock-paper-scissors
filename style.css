@@ -64,3 +64,13 @@ body {
   position: relative;
   right: 0.25em;
 }
+
+#reset-button {
+  font-size: 6em;
+  border: solid red 4px;
+  color: red;
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  margin-top: 0.4em;
+}
