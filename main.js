@@ -79,4 +79,9 @@ const game = (rounds) => {
   }
 };
 
-game(5);
+const choices = document.querySelectorAll(".game-choice");
+choices.forEach((choice) => {
+  choice.addEventListener("click", (e) => {
+    e.target.style.background = "lightgray";
+  });
+});
